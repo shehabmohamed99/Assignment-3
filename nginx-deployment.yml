@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webserver-deployment
+  name: nginx-deployment
   labels:
     app: webserver
 spec:
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: webserver
-        image: your-dockerhub-username/your-image-name:latest
+        image: shehab999/my-nginx:v01
         ports:
         - containerPort: 8080
