@@ -1,0 +1,66 @@
+a) Kubernetes Architecture
+
+Master Node:
+The control plane of Kubernetes that manages the state of the cluster.
+Core components include:
+kube-apiserver: Provides a REST API interface for interacting with the cluster. It handles all administrative operations.
+etcd: A distributed key-value store used to store all cluster data, including configuration and state.
+kube-scheduler: Assigns workloads (pods) to nodes based on resource availability and other constraints.
+kube-controller-manager: Runs various controllers (e.g., node controller, replication controller) to ensure the cluster's desired state is maintained.
+
+
+Worker Node:
+kubelet: Communicates with the master node and ensures that the containers in pods are running.
+kube-proxy: Manages networking for the pods, ensuring communication between them and external access.
+Container Runtime: (e.g., Docker, containerd) Responsible for running containers within pods.
+
+
+What is a Pod in Kubernetes, and How Does It Differ from a Docker Container?
+
+Pod: The smallest deployable unit in Kubernetes. A pod encapsulates one or more containers, along with shared storage, networking, and specifications about how the containers should run.
+
+Differences:
+A pod can contain multiple tightly coupled containers, whereas a Docker container is a standalone runtime instance.
+Pods share a network namespace, allowing containers within the same pod to communicate via localhost.
+Pods are managed by Kubernetes, while Docker containers are typically managed by Docker Engine.
+
+
+
+b) Deployments and Services
+
+A Deployment defines the desired state of an application (e.g., number of replicas, image version) and manages updates to the application seamlessly.
+It ensures high availability by:
+Managing the number of pod replicas.
+Automatically replacing unhealthy pods with new ones.
+Allowing rolling updates and rollbacks to avoid downtime.
+
+
+Types of Services in Kubernetes
+
+ClusterIP:
+Default service type.
+Exposes the service only within the cluster.
+Use case: Internal communication between microservices.
+
+
+NodePort:
+Exposes the service on a static port on each worker node.
+Use case: External access for development or testing purposes.
+
+
+LoadBalancer:
+Provisions an external load balancer (e.g., on a cloud provider).
+Use case: Exposing services to external traffic with high availability.
+
+
+c) Scaling and Autoscaling
+
+Manual Scaling: Adjusting the number of pod replicas using the kubectl scale command or by modifying the Deployment manifest.
+
+Autoscaling: Kubernetes provides dynamic scaling based on resource usage.
+Horizontal Pod Autoscaler (HPA)
+Automatically adjusts the number of pod replicas in a deployment based on observed CPU, memory, or custom metrics.
+How It Works:
+Continuously monitors metrics from the Metrics Server.
+Compares the observed metrics to the target utilization thresholds.
+Scales pods up or down to match the desired workload, ensuring optimal resource utilization.
